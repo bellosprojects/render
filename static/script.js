@@ -1,5 +1,8 @@
 const GRID_SIZE = 20; // Nuestra unidad de medida
 
+let nodoOrigen = null;
+const flechas = [];
+
 // 1. Crear el escenario
 const stage = new Konva.Stage({
     container: 'canvas-container',
@@ -71,9 +74,28 @@ function crearCuadrado(x, y, texto) {
     grupo.add(label);
 
     grupo.on('click', (e) => {
-        trasformar.nodes([grupo]);
+
+        if(e.evt.altKey){
+            if(!nodoOrigen){
+                nodoOrigen = grupo;
+                rect.stroke('blue');
+            }else {
+                if (nodoOrigen !== grupo) {
+                    crearConexion(nodoOrigen, grupo);
+                }
+                nodoOrigen.findOne('Rect').stroke('#333');
+                nodoOrigen = null;
+            }
+        }else{
+            trasformar.nodes([grupo]);
+        }
+
         layer.draw();
         e.cancelBubble = true;
+    });
+
+    grupo.on('transform', () => {
+        actualizarConexiones();
     });
 
     grupo.on('transformend', () => {
@@ -108,7 +130,7 @@ function crearCuadrado(x, y, texto) {
 
         const stageBox = stage.container().getBoundingClientRect();
         const areaPos = {
-            x: stageBox.left + grupo.x(), // Ajuste por el margen lateral
+            x: stageBox.left + grupo.x(), 
             y: stageBox.top + grupo.y()
         }
 
@@ -167,6 +189,7 @@ function crearCuadrado(x, y, texto) {
         }else{
             trashZone.classList.remove('drag-over');
         }
+        actualizarConexiones();
     });
 
 
@@ -178,6 +201,14 @@ function crearCuadrado(x, y, texto) {
         if(
             pos && pos.x < 80 && pos.y > window.innerHeight - 160
         ){
+
+            for(let i = flechas.length -1; i >=0; i--){
+                if(flechas[i].nodoInicio === grupo || flechas[i].nodoFin === grupo){
+                    flechas[i].destroy();
+                    flechas.splice(i, 1);
+                }
+            }
+
             grupo.destroy();
             layer.draw();
             console.log("Eliminado");
@@ -200,13 +231,128 @@ crearCuadrado(40, 40, "Mi primer Cuadro");
 layer.draw();
 
 function obtenerCentro(){
-    const stageWidth = stage.width();
-    const stageHeight = stage.height();
+    const stageWidth = stage.width() + Math.random() * 400 -200;
+    const stageHeight = stage.height() + Math.random() * 400 -200;
 
     const x = Math.round((stageWidth / 2) / GRID_SIZE) * GRID_SIZE;
     const y = Math.round((stageHeight / 2) / GRID_SIZE) * GRID_SIZE;
 
     return {x, y};
+}
+
+function calcularPuntosOrtogonales(p1, p2){
+    return [
+        p1.x, p1.y,
+        p2.x, p1.y,
+        p2.x, p2.y
+    ];
+}
+
+function crearConexion(origen, destino){
+    const p1 = {
+        x: origen.x() + origen.findOne('Rect').width() / 2,
+        y: origen.y() + origen.findOne('Rect').height() / 2,
+    };
+    const p2 = {
+        x: destino.x() + destino.findOne('Rect').width() / 2,
+        y: destino.y() + destino.findOne('Rect').height() / 2, 
+    }
+
+    const flecha = new Konva.Arrow({
+        points: calcularPuntosOrtogonales(p1, p2),
+        pointerLength: 10,
+        pointerWidth: 10,
+        fill: '#666',
+        stroke: '#666',
+        strokeWidth: 3,
+    });
+
+    const textoFlecha = new Konva.Text({
+        text: 'Texto',
+        fontSize: 14,
+        fill: '#999',
+        fontStyle: 'italic',
+        align: 'center',
+    });
+
+    flecha.nodoInicio = origen;
+    flecha.nodoFin = destino;
+    flecha.etiqueta = textoFlecha;
+
+    textoFlecha.on('dblclick', () => {
+        textoFlecha.hide();
+        layer.draw();
+        const stageBox = stage.container().getBoundingClientRect();
+        const areaPos = {
+            x: stageBox.left + (flecha.points()[0] + flecha.points()[2]) / 2,
+            y: stageBox.top + (flecha.points()[1] + flecha.points()[3]) / 2
+        }
+        const textarea = document.createElement('textarea');
+        document.body.appendChild(textarea);
+        textarea.value = textoFlecha.text();
+        textarea.style.position = 'absolute';
+        textarea.style.top = areaPos.y + 'px';
+        textarea.style.left = areaPos.x + 'px';
+        textarea.style.fontSize = '14px';
+        textarea.style.padding = '5px';
+        textarea.style.border = 'none';
+        textarea.style.resize = 'none';
+        textarea.style.overflow = 'hidden';
+        textarea.style.outline = 'none';
+        textarea.style.fontFamily = 'sans-serif';
+        textarea.style.margin = '0px';
+        textarea.style.background = 'transparent';
+        textarea.focus();
+        function guardarCambios(){
+            textoFlecha.text(textarea.value);
+            textoFlecha.show();
+            document.body.removeChild(textarea);
+            layer.draw();
+        }
+        textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                guardarCambios();
+            }
+        });
+        textarea.addEventListener('blur', guardarCambios);
+    });
+
+    layer.add(flecha, textoFlecha);
+    flechas.push(flecha);
+    flecha.moveToBottom();
+    actualizarConexiones();
+}
+
+function actualizarConexiones(){
+    flechas.forEach(flecha => {
+        if(!flecha.nodoInicio || !flecha.nodoFin) return;
+
+        const rectInicio = flecha.nodoInicio.findOne('Rect');
+        const rectFin = flecha.nodoFin.findOne('Rect');
+
+        if (!rectInicio || !rectFin) return;
+
+        const p1 = {
+            x: flecha.nodoInicio.x() + rectInicio.width() / 2,
+            y: flecha.nodoInicio.y() + rectInicio.height() / 2,
+        };
+
+        const p2 = {
+            x: flecha.nodoFin.x() + rectFin.width() / 2,
+            y: flecha.nodoFin.y() + rectFin.height() / 2,
+        };
+
+        const puntos = calcularPuntosOrtogonales(p1, p2);
+        flecha.points(puntos);
+
+        if(flecha.etiqueta){
+            flecha.etiqueta.position({
+                x: puntos[2] + 10,
+                y: puntos[3] - 20,
+            });
+        }
+    });
+    layer.batchDraw();
 }
 
 document.getElementById('add-rect-btn').addEventListener('click', () => {

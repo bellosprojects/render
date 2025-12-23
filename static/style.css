@@ -59,8 +59,8 @@ body, html {
 }
 
 .rect-icon{
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 12px;
     background-color: #5865f2;
     border-radius: 3px;
     border: 2px solid #ffffff;
