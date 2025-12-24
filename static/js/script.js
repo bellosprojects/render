@@ -41,6 +41,7 @@ const trasformar = new Konva.Transformer({
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
+    imprimir(data);
 
     if(data.tipo === "users"){
         actualizarPresencia(data.usuarios);    
@@ -49,13 +50,13 @@ socket.onmessage = (event) => {
     if(data.tipo === "estado_inicial"){
         data.objetos.forEach(obj => {
             if(obj.type === "square"){
-                crearCuadrado(obj.x, obj.y, obj.text, obj.id, false);
+                crearCuadrado(obj.x, obj.y, obj.text, obj.id, false, obj.w, obj.h);
             }
         });
     }
 
     if(data.tipo === "crear_cuadrado"){
-        crearCuadrado(data.x,data.y,data.text,data.id,false);
+        crearCuadrado(data.x,data.y,data.text,data.id,false,data.w,data.h);
     }
 
     if(data.tipo === "mover_nodo"){
@@ -140,6 +141,10 @@ socket.onmessage = (event) => {
     }
 };
 
+function imprimir(text){
+    console.log(text);
+}
+
 function actualizarPresencia(usuarios){
     const container = document.getElementById('user-presence');
     container.innerHTML = '';
@@ -162,7 +167,7 @@ stage.add(layer);
 const trashZone = document.getElementById('trash-container');
 
 // 2. Función para crear un cuadrado con bordes redondeados
-function crearCuadrado(x, y, texto, id = null, debeEmitir = true) {
+function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = null) {
 
     const newId = id || "nodo-" + Date.now();
 
@@ -174,8 +179,8 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true) {
     });
 
     const rect = new Konva.Rect({
-        width: GRID_SIZE * 5,  // 100px
-        height: GRID_SIZE * 3, // 60px
+        width: w || (GRID_SIZE * 5),  // 100px
+        height: h || (GRID_SIZE * 3), // 60px
         fill: 'white',
         stroke: '#333',
         strokeWidth: 2,
