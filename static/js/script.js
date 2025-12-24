@@ -1,28 +1,6 @@
 let nombreUsuario = prompt("Ingresa tu nombre de usuario:") || "Anonimo";
 const socket = new WebSocket(`ws://${window.location.host}/ws/${nombreUsuario}`);
 
-socket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-
-    if(data.type === "users"){
-        actualizarPresencia(data.usuarios);    
-    }
-}
-
-function actualizarPresencia(usuarios){
-    const container = document.getElementById('user-presence');
-    container.innerHTML = '';
-
-    usuarios.forEach(user => {
-        const iniciales = user.substring(0,2);
-        const div = document.createElement('div');
-        div.className = 'user-avatar';
-        div.innerHTML = iniciales;
-        div.title = user;
-        container.appendChild(div);
-    });
-}
-
 const GRID_SIZE = 20; // Nuestra unidad de medida
 
 let nodoOrigen = null;
@@ -59,6 +37,122 @@ const trasformar = new Konva.Transformer({
     ],
 });
 
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    if(data.tipo === "users"){
+        actualizarPresencia(data.usuarios);    
+    }
+
+    if(data.tipo === "estado_inicial"){
+        data.objetos.forEach(obj => {
+            if(obj.type === "square"){
+                crearCuadrado(obj.x, obj.y, obj.text, obj.id, false);
+            }
+        });
+    }
+
+    if(data.tipo === "crear_cuadrado"){
+        crearCuadrado(data.x,data.y,data.text,data.id,false);
+    }
+
+    if(data.tipo === "mover_nodo"){
+        const nodoAjeno = stage.findOne('#' + data.id);
+
+        if(nodoAjeno){
+            nodoAjeno.position({
+                x: data.x,
+                y: data.y
+            });
+            
+            actualizarConexiones();
+            layer.batchDraw();
+        }
+    }
+
+    if(data.tipo === "eliminar_nodo"){
+        const nodoDelete = stage.findOne('#' + data.id);
+        if(nodoDelete){
+            for(let i = flechas.length -1; i>=0 ; i--){
+                if(flechas[i].nodoInicio === nodoDelete || flechas[i].nodoFin === nodoDelete){
+                    flechas[i].destroy();
+                    flechas.splice(i, 1);
+                }
+            }
+
+            nodoDelete.destroy();
+
+            if(trasformar.nodes().includes(nodoDelete)){
+                trasformar.nodes([]);
+            }
+
+            actualizarConexiones();
+            layer.batchDraw();
+        }
+    }
+
+    if(data.tipo === "resize_nodo"){
+        const nodo = stage.findOne('#' + data.id);
+        if(nodo){
+            const rect = nodo.findOne('.fondo-rect');
+            const label = nodo.findOne('.texto-nodo');
+
+            nodo.position({
+                x: data.x,
+                y: data.y
+            });
+
+            if(rect){
+                rect.width(data.w);
+                rect.height(data.h);
+            }
+
+            if(label){
+                label.width(data.w);
+                label.y((data.h - label.height()) / 2);
+            }
+
+            actualizarConexiones();
+            layer.batchDraw();
+        }
+    }
+
+    if(data.tipo === "cambiar_texto"){
+        const nodo = stage.findOne('#' + data.id);
+        if(nodo){
+            const rect = nodo.findOne('.fondo-rect');
+            const label = nodo.findOne('.texto-nodo');
+
+            if(label){
+                label.text(data.text);
+
+                if(rect){
+                    rect.height(data.h);
+                    label.y((rect.height() - label.height()) / 2);
+                }
+            }
+
+            actualizarConexiones();
+            layer.batchDraw();
+        }
+    }
+};
+
+function actualizarPresencia(usuarios){
+    const container = document.getElementById('user-presence');
+    container.innerHTML = '';
+
+    usuarios.forEach(user => {
+        const iniciales = user.substring(0,2);
+        const div = document.createElement('div');
+        div.className = 'user-avatar';
+        div.innerHTML = iniciales;
+        div.title = user;
+        container.appendChild(div);
+    });
+}
+
+
 layer.add(trasformar);
 
 stage.add(layer);
@@ -66,11 +160,15 @@ stage.add(layer);
 const trashZone = document.getElementById('trash-container');
 
 // 2. Función para crear un cuadrado con bordes redondeados
-function crearCuadrado(x, y, texto) {
+function crearCuadrado(x, y, texto, id = null, debeEmitir = true) {
+
+    const newId = id || "nodo-" + Date.now();
+
     const grupo = new Konva.Group({
         x: x,
         y: y,
         draggable: true,
+        id: newId
     });
 
     const rect = new Konva.Rect({
@@ -140,12 +238,29 @@ function crearCuadrado(x, y, texto) {
 
         label.y((rect.height() - label.height()) / 2);
 
+        const newX = Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE;
+        const newY = Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE
+
         grupo.position({
-            x: Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE,
-            y: Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE,
+            x: newX,
+            y: newY,
         });
 
         trasformar.nodes([grupo]);
+
+        const mensaje = {
+            tipo: "resize_nodo",
+            id: grupo.id(),
+            x: grupo.x(),
+            y: grupo.y(),
+            w: rect.width(),
+            h: rect.height()
+        };
+
+        if(socket.readyState === WebSocket.OPEN){
+            socket.send(JSON.stringify(mensaje));
+        }
+
         layer.draw();
     });
 
@@ -191,6 +306,18 @@ function crearCuadrado(x, y, texto) {
 
             label.show();
             document.body.removeChild(textarea);
+
+            const mensaje = {
+                tipo: "cambiar_texto",
+                id: grupo.id(),
+                text: label.text(),
+                h: rect.height()
+            };
+
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify(mensaje));
+            }
+
             trasformar.nodes([grupo]);
             layer.draw();
         }
@@ -208,13 +335,24 @@ function crearCuadrado(x, y, texto) {
         const pos = stage.getPointerPosition();
 
         if(
-            pos && pos.x < 80 && pos.y > window.innerHeight - 160
+            pos && pos.x < 10 && pos.y > window.innerHeight - 160
         ){
             trashZone.classList.add('drag-over');
         }else{
             trashZone.classList.remove('drag-over');
         }
         actualizarConexiones();
+
+        const mensaje = {
+            tipo: "mover_nodo",
+            id: grupo.id(),
+            x: grupo.x(),
+            y: grupo.y()
+        };
+
+        if (socket.readyState === WebSocket.OPEN){
+            socket.send(JSON.stringify(mensaje));
+        }
     });
 
 
@@ -224,7 +362,7 @@ function crearCuadrado(x, y, texto) {
         const pos = stage.getPointerPosition();
 
         if(
-            pos && pos.x < 80 && pos.y > window.innerHeight - 160
+            pos && pos.x < 10 && pos.y > window.innerHeight - 160
         ){
 
             for(let i = flechas.length -1; i >=0; i--){
@@ -234,26 +372,61 @@ function crearCuadrado(x, y, texto) {
                 }
             }
 
+            const idDelete = grupo.id();
             grupo.destroy();
+            trasformar.nodes([]);
             layer.draw();
+
+            const mensaje = {
+                tipo: "eliminar_nodo",
+                id: idDelete
+            };
+
+            if(socket.readyState === WebSocket.OPEN){
+                socket.send(JSON.stringify(mensaje));
+            } 
+
             console.log("Eliminado");
         }else{
+
+        const newX = Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE, newY = Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE;
         // Redondeamos la posición a la rejilla de 20px
         grupo.position({
-            x: Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE,
-            y: Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE,
+            x: newX,
+            y: newY,
         });
+
+        const mensaje = {
+            tipo: "mover_nodo",
+            id: grupo.id(),
+            x: newX,
+            y: newY
+        };
+
+        if (socket.readyState === WebSocket.OPEN){
+            socket.send(JSON.stringify(mensaje));
+        }
     }
     trashZone.classList.remove('drag-over');
     layer.batchDraw(); // Refrescar lienzo
     });
 
     layer.add(grupo);
-}
 
-// 3. Probamos creando uno
-crearCuadrado(40, 40, "Mi primer Cuadro");
-layer.draw();
+    if(debeEmitir){
+         const mensaje = {
+            tipo: "crear_cuadrado",
+            id: newId,
+            type: "square",
+            x: x,
+            y: y,
+            w: GRID_SIZE * 5,
+            h: GRID_SIZE * 3,
+            text: texto
+         };
+         socket.send(JSON.stringify(mensaje));
+    }
+}
 
 function obtenerCentro(){
     const stageWidth = stage.width() + Math.random() * 400 -200;
@@ -382,7 +555,7 @@ function actualizarConexiones(){
 
 document.getElementById('add-rect-btn').addEventListener('click', () => {
     const centro = obtenerCentro();
-    crearCuadrado(centro.x, centro.y, "Nuevo Cuadro");
+    crearCuadrado(centro.x, centro.y, "Nuevo Cuadro", null, true);
     layer.draw();
 });
 
