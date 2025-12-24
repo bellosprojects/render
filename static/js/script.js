@@ -1,5 +1,7 @@
+const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
 let nombreUsuario = prompt("Ingresa tu nombre de usuario:") || "Anonimo";
-const socket = new WebSocket(`ws://${window.location.host}/ws/${nombreUsuario}`);
+const socket = new WebSocket(`${protocol}//${window.location.host}/ws/${nombreUsuario}`);
 
 const GRID_SIZE = 20; // Nuestra unidad de medida
 
