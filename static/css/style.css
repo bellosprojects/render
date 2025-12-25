@@ -131,3 +131,24 @@ textarea {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: help;
 }
+
+.floating-toolbar {
+    position: absolute;
+    background: rgb(58, 58, 58);
+    padding: 8px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.607);
+    display: none;
+    gap: 8px;
+    z-index: 200;
+}
+
+.color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #eee;
+    transition: transform 0.2s;
+}
+.color-dot:hover { transform: scale(1.2); }

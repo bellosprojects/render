@@ -118,24 +118,31 @@ async def websocket_endpoint(websocket: WebSocket, nombre: str):
                 if not nodo:
                     manager.active_connections[websocket]["objetc"] = None
                     await manager.broadcast_users()
-
-                ocupado_por = None
-
-                for ws in manager.active_connections.keys():
-                    if manager.active_connections[ws]['objetc'] == nodo and ws != websocket:
-                        ocupado_por = manager.active_connections[ws]["nombre"]
-                        break
-
-                if ocupado_por and object is not None:
-                    await websocket.send_json({
-                        "tipo": "nodo_bloqueado",
-                        "id": nodo,
-                        "por": ocupado_por
-                    })
-
                 else:
-                    manager.active_connections[websocket]["objetc"] = nodo
-                    await manager.broadcast_users()
+
+                    ocupado_por = None
+
+                    for ws in manager.active_connections.keys():
+                        if manager.active_connections[ws]['objetc'] == nodo and ws != websocket:
+                            ocupado_por = manager.active_connections[ws]["nombre"]
+                            break
+
+                    if ocupado_por and object is not None:
+                        await websocket.send_json({
+                            "tipo": "nodo_bloqueado",
+                            "id": nodo,
+                            "por": ocupado_por
+                        })
+
+                    else:
+                        manager.active_connections[websocket]["objetc"] = nodo
+                        await manager.broadcast_users()
+
+            elif data['tipo'] == "cambiar_color":
+                nodo_id = data["id"]
+                if nodo_id in digram_state:
+                    digram_state[nodo_id]["color"] = data["color"]
+                await manager.broadcast_users(data, websocket)
 
     except WebSocketDisconnect:
         manager.disconnect(websocket)

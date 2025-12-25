@@ -6,6 +6,8 @@ let myNode = null;
 
 const socket = new WebSocket(`${protocol}//${window.location.host}/ws/${nombreUsuario}`);
 
+const colorPicker = document.getElementById('color-picker');
+
 socket.addEventListener('open', () => {
     socket.send(JSON.stringify({
         tipo: "color",
@@ -52,7 +54,6 @@ const trasformar = new Konva.Transformer({
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    imprimir(data);
 
     if(data.tipo === "users"){
         actualizarPresencia(data.usuarios);    
@@ -61,13 +62,13 @@ socket.onmessage = (event) => {
     if(data.tipo === "estado_inicial"){
         data.objetos.forEach(obj => {
             if(obj.type === "square"){
-                crearCuadrado(obj.x, obj.y, obj.text, obj.id, false, obj.w, obj.h);
+                crearCuadrado(obj.x, obj.y, obj.text, obj.id, false, obj.w, obj.h, obj.color);
             }
         });
     }
 
     if(data.tipo === "crear_cuadrado"){
-        crearCuadrado(data.x,data.y,data.text,data.id,false,data.w,data.h);
+        crearCuadrado(data.x,data.y,data.text,data.id,false,data.w,data.h,data.color);
     }
 
     if(data.tipo === "mover_nodo"){
@@ -156,11 +157,21 @@ socket.onmessage = (event) => {
         layer.draw();
         console.warn(`Este nodo ya esta siendo ocupado por ${data.por}`)
     }
-};
 
-function imprimir(text){
-    console.log(text);
-}
+    if(data.tipo === "cambiar_color"){
+        const nodo = stage.findOne('#' + data.id);
+        if(nodo){
+            const rect = nodo.findOne('.fondo-rect');
+            if(rect) rect.fill(data.color);
+            
+            const label = nodo.findOne('.texto-nodo');
+            if(label){
+                label.fill(obtenerColorTexto(data.color));
+            }
+            layer.batchDraw();
+        }
+    }
+};
 
 let jugadoresActuales = [];
 
@@ -218,7 +229,7 @@ stage.add(layer);
 const trashZone = document.getElementById('trash-container');
 
 // 2. Función para crear un cuadrado con bordes redondeados
-function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = null) {
+function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = null, color = null) {
 
     const newId = id || "nodo-" + Date.now();
     
@@ -232,8 +243,8 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
     const rect = new Konva.Rect({
         width: w || (GRID_SIZE * 5),  // 100px
         height: h || (GRID_SIZE * 3), // 60px
-        fill: 'white',
-        stroke: '#333',
+        fill: color || 'white',
+        stroke:  '#333',
         strokeWidth: 2,
         cornerRadius: 8,
         name: 'fondo-rect'
@@ -246,7 +257,8 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
         padding: 10,
         align: 'center',
         verticalAlign: 'middle',
-        name: 'texto-nodo'
+        name: 'texto-nodo',
+        fill: obtenerColorTexto(rect.fill()),
     });
     
     label.y((rect.height() - label.height()) / 2);
@@ -255,6 +267,9 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
     grupo.add(label);
     
     grupo.on('dragstart', () => {
+
+        colorPicker.style.display = 'none';
+
         trasformar.nodes([grupo]);
         layer.batchDraw();
     });
@@ -273,13 +288,18 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
                 nodoOrigen = null;
             }
         }else{
-            trasformar.nodes([grupo]);
-        }
 
-        socket.send(JSON.stringify({
-            tipo: "seleccionar",
-            objetc: grupo.id()
-        }));
+            if(!estaOcupado(grupo.id())){
+                trasformar.nodes([grupo]);
+
+                mostrarPaleta(grupo);
+
+                socket.send(JSON.stringify({
+                    tipo: "seleccionar",
+                    objetc: grupo.id()
+                }));
+            }
+        }
 
         layer.draw();
         e.cancelBubble = true;
@@ -445,34 +465,16 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
     // --- LÓGICA DEL IMÁN (SNAPPING) ---
     grupo.on('dragend', () => {
 
+        if(!estaOcupado(grupo.id()))
+        mostrarPaleta(grupo);
+
         const pos = stage.getPointerPosition();
 
         if(
             pos && pos.x < 10 && pos.y > window.innerHeight - 160
         ){
 
-            for(let i = flechas.length -1; i >=0; i--){
-                if(flechas[i].nodoInicio === grupo || flechas[i].nodoFin === grupo){
-                    flechas[i].destroy();
-                    flechas.splice(i, 1);
-                }
-            }
-
-            const idDelete = grupo.id();
-            grupo.destroy();
-            trasformar.nodes([]);
-            layer.draw();
-
-            const mensaje = {
-                tipo: "eliminar_nodo",
-                id: idDelete
-            };
-
-            if(socket.readyState === WebSocket.OPEN){
-                socket.send(JSON.stringify(mensaje));
-            } 
-
-            console.log("Eliminado");
+            eliminarNodoLocalYRemoto(grupo);
         }else{
 
         const newX = Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE, newY = Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE;
@@ -639,10 +641,88 @@ function actualizarConexiones(){
     layer.batchDraw();
 }
 
+function eliminarNodoLocalYRemoto(nodo){
+    const idDelete = nodo.id();
+
+    for(let i = flechas.length -1; i >=0; i--){
+        if(flechas[i].nodoInicio === nodo || flechas[i].nodoFin === nodo){
+            flechas[i].destroy();
+            flechas.splice(i, 1);
+        }
+    }
+
+    nodo.destroy();
+    trasformar.nodes([]);
+    layer.draw();
+
+    if(socket.readyState === WebSocket.OPEN){
+        socket.send(JSON.stringify({
+            tipo: "eliminar_nodo",
+            id: idDelete
+        }));
+    }
+}
+
+function mostrarPaleta(nodo) {
+
+    if (estaOcupado(nodo.id())) return;
+
+    const stageBox = stage.container().getBoundingClientRect();
+    colorPicker.style.display = 'flex';
+    colorPicker.style.top = (stageBox.top + nodo.y() - 70) + 'px';
+    colorPicker.style.left = (stageBox.left + nodo.x() + 20) + 'px';
+    
+    // Guardar referencia al nodo actual en la paleta
+    colorPicker.dataset.nodoTarget = nodo.id();
+}
+
 document.getElementById('add-rect-btn').addEventListener('click', () => {
     const centro = obtenerCentro();
     crearCuadrado(centro.x, centro.y, "Nuevo Cuadro", null, true);
     layer.draw();
+});
+
+window.addEventListener('keydown', (e) => {
+    if(e.key === 'Delete' || e.key === 'Backspace'){
+
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA'){
+            return;
+        }
+
+        const nodosSelected = trasformar.nodes();
+
+        nodosSelected.forEach(nodo => {
+            const nodoID = nodo.id();
+
+            if(!estaOcupado(nodoID)){
+                eliminarNodoLocalYRemoto(nodo);
+            }
+        }); 
+
+    }
+});
+
+document.querySelectorAll('.color-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+        const nodoID = colorPicker.dataset.nodoTarget;
+        const nodo = stage.findOne('#' + nodoID);
+        if(nodo){
+            const rect = nodo.findOne('.fondo-rect');
+            rect.fill(dot.dataset.color);
+
+            const label = nodo.findOne('.texto-nodo');
+            if(label){
+                label.fill(obtenerColorTexto(dot.dataset.color));
+            }
+
+            layer.batchDraw();
+            socket.send(JSON.stringify({
+                tipo: "cambiar_color",
+                id: nodoID,
+                color: dot.dataset.color
+            }));
+        }
+    });
 });
 
 window.addEventListener('resize', () => {
@@ -652,6 +732,9 @@ window.addEventListener('resize', () => {
 
 stage.on('click', (e) => {
     if(e.target === stage){
+
+        colorPicker.style.display = 'none';
+
         trasformar.nodes([]);
 
         socket.send(JSON.stringify({
