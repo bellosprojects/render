@@ -486,38 +486,38 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
     // --- LÓGICA DEL IMÁN (SNAPPING) ---
     grupo.on('dragend', () => {
 
-        if(!estaOcupado(grupo.id()))
-        mostrarPaleta(grupo);
-
         const pos = stage.getPointerPosition();
 
-        if(
-            pos && pos.x < 10 && pos.y > window.innerHeight - 160
-        ){
+        if(pos && pos.x < 10 && pos.y > window.innerHeight - 160){
             colorPicker.style.display = 'none';
             eliminarNodoLocalYRemoto(grupo);
-        }else{
+        } 
+        
+        else {
 
-        const newX = Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE, newY = Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE;
-        // Redondeamos la posición a la rejilla de 20px
-        grupo.position({
-            x: newX,
-            y: newY,
-        });
+            const newX = Math.round(grupo.x() / GRID_SIZE) * GRID_SIZE, newY = Math.round(grupo.y() / GRID_SIZE) * GRID_SIZE;
+            // Redondeamos la posición a la rejilla de 20px
+            grupo.position({
+                x: newX,
+                y: newY,
+            });
 
-        const mensaje = {
-            tipo: "mover_nodo",
-            id: grupo.id(),
-            x: newX,
-            y: newY
-        };
+            if(!estaOcupado(grupo.id()))
+                mostrarPaleta(grupo);
 
-        if (socket.readyState === WebSocket.OPEN){
-            socket.send(JSON.stringify(mensaje));
+            const mensaje = {
+                tipo: "mover_nodo",
+                id: grupo.id(),
+                x: newX,
+                y: newY
+            };
+
+            if (socket.readyState === WebSocket.OPEN){
+                socket.send(JSON.stringify(mensaje));
+            }
         }
-    }
-    trashZone.classList.remove('drag-over');
-    layer.batchDraw(); // Refrescar lienzo
+        trashZone.classList.remove('drag-over');
+        layer.batchDraw(); // Refrescar lienzo
     });
 
     layer.add(grupo);
@@ -722,6 +722,37 @@ window.addEventListener('keydown', (e) => {
         }); 
 
     }
+
+    //Mover cuadro con las flechas del teclado
+    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){
+        const nodosSelected = trasformar.nodes();
+        nodosSelected.forEach(nodo => {
+            if(!estaOcupado(nodo.id())){
+                let deltaX = 0;
+                let deltaY = 0;
+                if(e.key === 'ArrowUp') deltaY = -GRID_SIZE;
+                if(e.key === 'ArrowDown') deltaY = GRID_SIZE;
+                if(e.key === 'ArrowLeft') deltaX = -GRID_SIZE;
+                if(e.key === 'ArrowRight') deltaX = GRID_SIZE;
+
+                
+                nodo.position({
+                    x: nodo.x() + deltaX,
+                    y: nodo.y() + deltaY
+                });
+                mostrarPaleta(nodo);
+                actualizarConexiones();
+                layer.batchDraw();
+                socket.send(JSON.stringify({
+                    tipo: "mover_nodo",
+                    id: nodo.id(),
+                    x: nodo.x(),
+                    y: nodo.y()
+                }));
+            }
+        });
+    }
+
 });
 
 document.querySelectorAll('.color-dot').forEach(dot => {
