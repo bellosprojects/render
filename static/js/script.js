@@ -484,7 +484,7 @@ function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = null, h = 
 
 
     // --- LÓGICA DEL IMÁN (SNAPPING) ---
-    grupo.on('dragend', () => {
+    grupo.on('dragend', () => { 
 
         const pos = stage.getPointerPosition();
 
