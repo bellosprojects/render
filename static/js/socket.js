@@ -29,7 +29,7 @@ function generarColor(){
     const verde = rojo * Math.random() + 40 + Math.random()*120;
     const azul = Math.max(20, verde * Math.random() - 30);
 
-    return `rgb(${rojo},${verde},${azul}})`;
+    return `rgb(${rojo},${verde},${azul})`;
 }
 
 const color = generarColor();
