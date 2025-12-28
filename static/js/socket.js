@@ -32,8 +32,9 @@ function generarColor(){
     return `rgb(${rojo},${verde},${azul}})`;
 }
 
-export const myColor = generarColor();
+const color = generarColor();
 
+export const myColor = color;
 
 export function init_socket(){
 

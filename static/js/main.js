@@ -1,4 +1,3 @@
-
 init_socket();
 
 import { socket, init_socket, myColor, nombreUsuario } from './socket.js';
@@ -15,7 +14,7 @@ const GRID_SIZE = 20; // Unidad de medida
 
 const colorPicker = document.getElementById('color-picker');
 
-export {stage, layer, socket, myColor, myNode, origenDatos, GRID_SIZE, colorPicker, trasformar, trashZone};
+export {stage, layer, socket, myNode, origenDatos, GRID_SIZE, colorPicker, trasformar, trashZone};
 
 export {estaOcupado, actualizarPresencia};
 
