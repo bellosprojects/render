@@ -62,15 +62,34 @@ export function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = nul
 
     grupo.on('click mousedown', (e) => {
 
-        if(!estaOcupado(grupo.id())){
-            trasformar.nodes([grupo]);
+        if(myNode != grupo.id()){
+            if(!estaOcupado(grupo.id())){
+                trasformar.nodes([grupo]);
 
-            mostrarPaleta(grupo);
+                mostrarPaleta(grupo);
+
+
+                socket.send(JSON.stringify({
+                    tipo: "seleccionar_nodo",
+                    id: grupo.id()
+                }));
+            }
+
+            grupo.moveToTop();
+            trasformar.moveToTop();
+            layer.batchDraw();
 
             socket.send(JSON.stringify({
-                tipo: "seleccionar_nodo",
+                tipo: "traer_al_frente",
                 id: grupo.id()
             }));
+        }
+
+        if(estaOcupado(grupo.id())){
+            grupo.draggable(false);
+        }
+        else{
+            grupo.draggable(true);
         }
 
         layer.draw();
@@ -219,9 +238,7 @@ export function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = nul
                 if (socket.readyState === WebSocket.OPEN) {
                     socket.send(JSON.stringify(mensaje));
                 }
-
-                trasformar.nodes([grupo]);
-
+                
                 const puntos = grupo.find('.grupo-punto-conexion');
                 puntos.forEach(pContenedor => {
                     const area = pContenedor.findOne('.punto-conexion');
@@ -256,32 +273,12 @@ export function crearCuadrado(x, y, texto, id = null, debeEmitir = true, w = nul
 
     grupo.on('mouseover', () => {
         if(estaOcupado(grupo.id())){
-            document.body.style.cursor = 'not-allowed';
+            stage.container().style.cursor = 'not-allowed';
         }
     });
 
     grupo.on('mouseout', () => {
-        document.body.style.cursor = 'default';
-    });
-
-
-    grupo.on('mousedown', () => {
-
-        grupo.moveToTop();
-        trasformar.moveToTop();
-        layer.batchDraw();
-
-        socket.send(JSON.stringify({
-            tipo: "traer_al_frente",
-            id: grupo.id()
-        }));
-
-        if(estaOcupado(grupo.id())){
-            grupo.draggable(false);
-        }
-        else{
-            grupo.draggable(true);
-        }
+        stage.container().style.cursor = 'default';
     });
 
     grupo.on('dragmove', () => {

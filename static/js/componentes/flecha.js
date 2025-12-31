@@ -102,11 +102,25 @@ export function crearPuntosConexion(grupo){
     });
 }
 
+let teclas = {};
+
+document.addEventListener('keydown', (e) => {
+    teclas[e.key] = true;
+});
+
+document.addEventListener('keyup', (e) => {
+    teclas[e.key] = false;
+});
+
 function iniciarDibujoConexion(nodoGrupo, puntoId){
 
     dibujandoConexion = true;
     origenDatos.nodoId = nodoGrupo.id();
     origenDatos.puntoId = puntoId;
+    
+    if(teclas['Shift']){
+        origenDatos.tipo = 'dinamica';
+    }
 
     const posMouse = stage.getPointerPosition();
 
@@ -131,15 +145,21 @@ function iniciarDibujoConexion(nodoGrupo, puntoId){
 }
 
 export function finalizarConexion(destinoNodoId, destinoPuntoId){
+
+    if(origenDatos.nodoId === destinoNodoId){
+        origenDatos.tipo = 'estatica';
+    }
+
     crearConexion(
         origenDatos.nodoId,
         origenDatos.puntoId,
         destinoNodoId,
-        destinoPuntoId
+        destinoPuntoId,
+        origenDatos.tipo,
     );
 }
 
-export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId, id = null, debeEmitir = true){
+export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId, tipo, id = null, debeEmitir = true){
 
     const nuevaConexion = {
         id: id || "flecha-" + Date.now(),
@@ -147,6 +167,7 @@ export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId
         origenPuntoId: origenPuntoId,
         destinoId: destinoId,
         destinoPuntoId: destinoPuntoId,
+        tipo: tipo,
         linea: null,
     };
 
@@ -158,6 +179,7 @@ export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId
                 origenPuntoId: origenPuntoId,
                 destinoId: destinoId,
                 destinoPuntoId: destinoPuntoId,
+                tipo: tipo,
                 id: nuevaConexion.id,
             }
         }));
@@ -177,14 +199,14 @@ export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId
     });
 
     flechaReal.on('mouseenter', () => {
-        document.body.style.cursor = 'pointer';
+        stage.container().style.cursor = 'pointer';
         flechaReal.stroke('#ff4d4d');
         flechaReal.fill('#ff4d4d');
         layer.batchDraw();
     });
 
     flechaReal.on('mouseleave', () => {
-        document.body.style.cursor = 'default';
+        stage.container().style.cursor = 'default';
         flechaReal.stroke('#4a90e2');
         flechaReal.fill('#4a90e2');
         layer.batchDraw();
@@ -192,14 +214,13 @@ export function crearConexion(origenId, origenPuntoId, destinoId, destinoPuntoId
 
     flechaReal.on('click', (e) => {
         e.cancelBubble = true;
-
         eliminarConexionPorId(nuevaConexion.id);
-        
     });
 
 
     nuevaConexion.linea = flechaReal;
     layer.add(flechaReal);
+    flechaReal.moveToBottom();
     flechas.push(nuevaConexion);
 
     cancelarDibujoConexion();
@@ -227,11 +248,14 @@ export function actualizarPosicionFlecha(conexion){
 
     let puntoInicioId = conexion.origenPuntoId;
     let puntoFinId = conexion.destinoPuntoId;
-
+    
     let orientacion = 'auto';
     let action = 'none';
-
-    if(puntoInicioId){
+    
+    let puntoExtra = [];
+    //Auto-flechas (dinamicas)
+    //Aqui se seleccionan automaticamente los puntoId
+    if(conexion.tipo == 'dinamica'){
         let state = false;
 
         //Correccion horizontal (del destino)
@@ -299,7 +323,189 @@ export function actualizarPosicionFlecha(conexion){
                 }
             }
         }
-    }   
+    } 
+
+    // flecha-estatica 
+    //Seleccin de orientacion y accion
+    //Evitamos los choces con base en las dimensiones de los cuadros
+    //Agregamos puntos extras de ser necesario para evitar choques
+    else {
+
+        //Primero verificamos conexiones reflexivas
+        if(nodoOrigen == nodoDestino){
+            if(puntoInicioId == 'bottom'){
+                if(puntoFinId == 'top'){
+                    puntoExtra = [
+                        obtenerPosPunto(nodoOrigen, 'left').x - sep,
+                        inicio.y + sep
+                    ];
+                    orientacion = 'vertical';
+                    action = 'subir';
+                }else{
+                    orientacion = 'vertical';
+                    action = 'bajar'; 
+                }
+            }else if(puntoInicioId == 'top'){
+                if(puntoFinId == 'bottom'){
+                    puntoExtra = [
+                        obtenerPosPunto(nodoOrigen, 'right').x + sep,
+                        inicio.y - sep
+                    ];
+                    orientacion = 'vertical';
+                    action = 'subir';
+                }else{
+                    orientacion = 'vertical';
+                    action = 'bajar'; 
+                }
+            }else if(puntoInicioId == 'left'){
+                if(puntoFinId == 'right'){
+                    puntoExtra = [
+                        inicio.x - sep,
+                        obtenerPosPunto(nodoOrigen, 'top').y - sep,
+                    ];
+                    orientacion = 'vertical';
+                    action = 'bajar';
+                }else{
+                    orientacion = 'vertical';
+                    action = 'subir'; 
+                }
+            }else{
+                if(puntoFinId == 'left'){
+                    puntoExtra = [
+                        inicio.x + sep,
+                        obtenerPosPunto(nodoOrigen, 'bottom').y + sep,
+                    ];
+                    orientacion = 'vertical';
+                    action = 'bajar';
+                }else{
+                    orientacion = 'vertical';
+                    action = 'subir'; 
+                }
+            }
+        }
+
+        //No es reflexivo
+        else{
+            if(puntoInicioId == 'bottom'){
+                if(puntoFinId == 'bottom'){
+                    if((inicio.x < obtenerPosPunto(nodoDestino, 'left').x && inicio.y < obtenerPosPunto(nodoDestino, 'top').y - sep) || (obtenerPosPunto(nodoOrigen, 'right').x < fin.x && fin.y < obtenerPosPunto(nodoOrigen, 'top').y - sep)){
+                        orientacion = 'vertical';
+                        action = 'subir';
+                        if(inicio.y > fin.y){
+                            action = 'bajar';
+                        }
+                    }
+                    else if((obtenerPosPunto(nodoOrigen, 'left').x > fin.x && fin.y < obtenerPosPunto(nodoOrigen, 'top').y - sep) || (obtenerPosPunto(nodoDestino, 'right').x < inicio.x && inicio.y < obtenerPosPunto(nodoDestino, 'top').y - sep)){
+                        orientacion = 'vertical';
+                        action = 'subir';
+                        if(inicio.y > fin.y){
+                            action = 'bajar';
+                        }
+                    }else if(inicio.y >= (obtenerPosPunto(nodoDestino, 'top').y - sep) && obtenerPosPunto(nodoOrigen, 'top').y <= fin.y + sep){
+                        orientacion = 'horizontal';
+                        action = 'subir';
+                        if(inicio.y < fin.y){
+                            action = 'bajar';
+                        }
+                    }else{
+                        if(inicio.y < (obtenerPosPunto(nodoDestino, 'top').y - sep)){
+                            if(inicio.x > fin.x){
+                                puntoExtra = [
+                                    obtenerPosPunto(nodoDestino, 'right').x + sep,
+                                    inicio.y + sep
+                                ];
+                                orientacion = 'vertical';
+                                action = 'subir';
+                            }else{
+                                puntoExtra = [
+                                    obtenerPosPunto(nodoDestino, 'left').x - sep,
+                                    inicio.y + sep
+                                ];
+                                orientacion = 'vertical';
+                                action = 'subir';
+                            }
+                        }else{
+                            if(inicio.x > fin.x){
+                                puntoExtra = [
+                                    obtenerPosPunto(nodoOrigen, 'left').x - sep,
+                                    inicio.y + sep
+                                ];
+                                orientacion = 'vertical';
+                                action = 'subir';
+                            }else{
+                                puntoExtra = [
+                                    obtenerPosPunto(nodoOrigen, 'right').x + sep,
+                                    inicio.y + sep
+                                ];
+                                orientacion = 'vertical';
+                                action = 'subir';
+                            }
+                        }
+                    }
+                    
+                }else if (puntoFinId == 'left'){
+                    //Caso ideal
+                    if(inicio.x < fin.x - sep && inicio.y < fin.y - sep){
+                        orientacion = 'vertical';
+                        action = 'subir';
+                    }else if(inicio.x >= obtenerPosPunto(nodoDestino, 'right').x){
+                        orientacion = 'vertical';
+                        action = 'bajar';
+                        if(inicio.y + sep > obtenerPosPunto(nodoDestino, 'top').y - sep && inicio.y + sep < obtenerPosPunto(nodoDestino, 'bottom').y + sep){
+                            puntoExtra = [
+                                inicio.x,
+                                obtenerPosPunto(nodoDestino, 'bottom').y + sep
+                            ];
+                        }
+                    }else{
+                        orientacion = 'horizontal';
+                        action = 'subir';
+                        if(obtenerPosPunto(nodoOrigen, 'right').x > fin.x - 2*sep && obtenerPosPunto(nodoOrigen, 'left').x < fin.x && inicio.y > fin.y){
+                            puntoExtra = [
+                                obtenerPosPunto(nodoOrigen, 'left').x - sep,
+                                inicio.y + sep
+                            ];
+                            action = 'bajar';
+                        }
+                    }
+                }else if(puntoFinId == 'right'){
+
+                }else{
+
+                }
+            }else if (puntoInicioId == 'left'){
+                if(puntoFinId == 'bottom'){
+                
+                }else if (puntoFinId == 'left'){
+
+                }else if(puntoFinId == 'right'){
+
+                }else{
+
+                }
+            }else if(puntoInicioId == 'right'){
+                if(puntoFinId == 'bottom'){
+                
+                }else if (puntoFinId == 'left'){
+
+                }else if(puntoFinId == 'right'){
+
+                }else{
+
+                }
+            }else{
+                if(puntoFinId == 'bottom'){
+                
+                }else if (puntoFinId == 'left'){
+
+                }else if(puntoFinId == 'right'){
+
+                }else{
+
+                }
+            }
+        }
+    }  
 
     inicio = obtenerPosPunto(nodoOrigen, puntoInicioId);
     fin = obtenerPosPunto(nodoDestino, puntoFinId);
@@ -328,14 +534,24 @@ export function actualizarPosicionFlecha(conexion){
         ultimaParte = [fin.x + sep, fin.y, fin.x + space, fin.y];
     }
 
+    let aux = {
+        x: primeraParte[2], y: primeraParte[3]
+    }
+
+    if(puntoExtra.length != 0){
+        aux = {
+            x: puntoExtra[0], y : puntoExtra[1]
+        }
+    }
+
     const puntosIntermedios = calcularPuntos(
-        {x: primeraParte[2], y: primeraParte[3]},
+        aux,
         {x: ultimaParte[0], y: ultimaParte[1]},
         orientacion,
         action
     );
 
-    const puntosFinales = primeraParte.concat(puntosIntermedios).concat(ultimaParte);
+    const puntosFinales = primeraParte.concat(puntoExtra).concat(puntosIntermedios).concat(ultimaParte);
 
     conexion.linea.points(puntosFinales);
     layer.batchDraw();
@@ -346,6 +562,7 @@ export function cancelarDibujoConexion(){
     dibujandoConexion = false;
     origenDatos.nodoId = null;
     origenDatos.puntoId = null;
+    origenDatos.tipo = 'estatica';
     if(flechaTemporal){
         flechaTemporal.destroy();
         flechaTemporal = null;
@@ -384,6 +601,7 @@ export function eliminarConexionPorId(flechaId){
                 break;
             }
         }
+
         layer.batchDraw();
     }
 

@@ -56,6 +56,7 @@ export function init_socket(){
                     flecha.origenPuntoId,
                     flecha.destinoId,
                     flecha.destinoPuntoId,
+                    flecha.tipo,
                     flecha.id,
                     false
                 );
@@ -188,6 +189,7 @@ export function init_socket(){
                 conexion.origenPuntoId,
                 conexion.destinoId,
                 conexion.destinoPuntoId,
+                conexion.tipo,
                 conexion.id,
                 false
             );

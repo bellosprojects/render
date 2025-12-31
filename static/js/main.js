@@ -7,7 +7,8 @@ let myNode = null;
 
 let origenDatos = {
     nodoId: null,
-    puntoId: null
+    puntoId: null,
+    tipo: "estatica"
 }
 
 const GRID_SIZE = 20; // Unidad de medida
@@ -278,12 +279,12 @@ stage.on('mousemove', () => {
         const posPunto = puntoMagnetico.getAbsolutePosition();
         destinoX = posPunto.x;
         destinoY = posPunto.y;
-        document.body.style.cursor = 'copy';
+        stage.container().style.cursor = 'copy';
 
     }else{
         destinoX = posMouse.x;
         destinoY = posMouse.y;
-        document.body.style.cursor = 'crosshair';
+        stage.container().style.cursor = 'crosshair';
     }
 
     const puntos = flechaTemporal.points();

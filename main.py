@@ -25,6 +25,7 @@ class Conexion(BaseModel):
     origenPuntoId: str
     destinoId: str
     destinoPuntoId: str
+    tipo: str
 
 class User(BaseModel):
     nombre: str
@@ -184,6 +185,17 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+@app.get("/status/{room_id}")
+async def state_of_room(room_id: str):
+    room = manager.get_or_create_diagram(room_id)
+    response = {
+        "usuarios": [user.model_dump() for user in room.usuarios.values()],
+        "conexiones": [conx.model_dump() for conx in room.conexiones.values()],
+        "nodos": [nodo.model_dump() for nodo in room.nodos.values()],
+    }
+
+    return response
+
 @app.websocket("/ws/{room_id}/{nombre}")
 async def websocket_endpoint(websocket: WebSocket, room_id:str, nombre: str):
 
@@ -197,6 +209,8 @@ async def websocket_endpoint(websocket: WebSocket, room_id:str, nombre: str):
 
             data = await websocket.receive_json()
             tipo = data.get("tipo")
+            if tipo not in ["mover_cursor", "mover_nodo"]:
+                log.debug(str(data))
 
             if not tipo:
                 continue

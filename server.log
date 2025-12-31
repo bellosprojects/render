@@ -1,24 +1,271 @@
-16:46:24 | INFO | SERVER | sala nyx2ioswj5 eliminada por estar vacia y sin contenido.
-16:46:38 | INFO | SERVER | sala nyx2ioswj5 eliminada por estar vacia y sin contenido.
-16:47:27 | INFO | SERVER | sala nyx2ioswj5 eliminada por estar vacia y sin contenido.
-16:49:21 | DEBUG | DATABASE | Conexion a DB establecida
-16:49:26 | DEBUG | DATABASE | Conexion a DB establecida
-16:49:35 | DEBUG | DATABASE | Conexion a DB establecida
-16:49:38 | DEBUG | DATABASE | Conexion a DB establecida
-16:49:40 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:06 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:31 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:34 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:36 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:48 | DEBUG | DATABASE | Conexion a DB establecida
-16:51:51 | DEBUG | DATABASE | Conexion a DB establecida
-16:52:54 | DEBUG | DATABASE | Conexion a DB establecida
-16:53:10 | DEBUG | DATABASE | Conexion a DB establecida
-16:53:12 | DEBUG | DATABASE | Conexion a DB establecida
-16:53:23 | DEBUG | DATABASE | Conexion a DB establecida
-16:53:24 | DEBUG | DATABASE | Conexion a DB establecida
-16:53:26 | DEBUG | DATABASE | Conexion a DB establecida
-16:54:43 | DEBUG | DATABASE | Conexion a DB establecida
-16:54:45 | DEBUG | DATABASE | Conexion a DB establecida
-16:54:48 | DEBUG | DATABASE | Conexion a DB establecida
-16:54:53 | DEBUG | DATABASE | Conexion a DB establecida
+18:17:15 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(83.58559234039419,152.52872841768607,97.5480149814286)'}
+18:17:17 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767133037238', 'x': 480, 'y': 580, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+18:17:17 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767133037466', 'x': 540, 'y': 500, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+18:17:18 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:17:18 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:17:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:17:21 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:17:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:17:26 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:17:26 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:17:29 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:17:29 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:17:30 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:17:30 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:17:30 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:18:28 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:18:29 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(88.82175530585495,88.84005672873973,46.07833308888743)'}
+18:18:31 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:31 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:31 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:32 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:32 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:32 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:33 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:33 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:33 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:38 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:18:40 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(78.64411094090522,103.9926212944159,37.52094250738705)'}
+18:18:42 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:43 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:44 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:44 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:45 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:46 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:18:46 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:18:47 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:18:47 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:48 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:18:49 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:03 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:20:07 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(91.03046266860987,102.91592085422742,56.905402937507375)'}
+18:20:09 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:20:09 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:11 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:20:11 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:20:11 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:20:19 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:20:19 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:20:21 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:20:23 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:20:23 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:24 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:20:24 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:20:26 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:20:26 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:27 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:20:27 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:20:29 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:20:29 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:20:29 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037238', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:20:47 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:20:47 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:20:47 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:21:44 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:21:44 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:21:49 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:21:49 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:21:49 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:21:55 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:21:55 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:22:01 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:22:01 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:22:01 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:23:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:23:21 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:23:23 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:23:23 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:23:26 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:23:26 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:23:26 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037238', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:23:31 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:23:31 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:23:32 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:23:32 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:23:32 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037238', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:23:42 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:23:43 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:23:43 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:23:45 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:23:45 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:24:51 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'estatica', 'id': 'flecha-1767133491543'}}
+18:24:56 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767133491543'}
+18:29:34 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'estatica', 'id': 'flecha-1767133774894'}}
+18:29:38 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767133774894'}
+18:29:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'estatica', 'id': 'flecha-1767133780159'}}
+18:29:41 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767133780159'}
+18:29:43 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'right', 'tipo': 'estatica', 'id': 'flecha-1767133783699'}}
+18:29:47 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767133783699'}
+18:29:48 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:29:48 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:29:50 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767133790909'}}
+18:30:16 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:30:16 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:30:18 | DEBUG | SERVER | {'tipo': 'redimensionar_nodo', 'id': 'nodo-1767133037238', 'x': 480, 'y': 440, 'w': 100, 'h': 100}
+18:30:19 | DEBUG | SERVER | {'tipo': 'redimensionar_nodo', 'id': 'nodo-1767133037238', 'x': 480, 'y': 440, 'w': 100, 'h': 140}
+18:30:21 | DEBUG | SERVER | {'tipo': 'redimensionar_nodo', 'id': 'nodo-1767133037238', 'x': 480, 'y': 440, 'w': 100, 'h': 160}
+18:30:29 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:30:29 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:48:23 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:48:23 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:48:23 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:49:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:49:21 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:49:23 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:49:23 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:49:26 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:49:26 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:49:29 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:49:29 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:49:29 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:49:31 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:49:31 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:49:33 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:49:33 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:49:35 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:49:35 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:49:37 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:49:37 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:49:37 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:02 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:04 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(101.98960164199288,151.0247435748494,112.10587502348872)'}
+18:50:04 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767133790909', 'id': 'flecha-1767135004479'}}
+18:50:05 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:05 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:50:06 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:07 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:08 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:08 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:50:09 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:09 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:11 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:11 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:50:13 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:13 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:16 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:16 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:50:17 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:50:17 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:50:17 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037466', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:19 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:19 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+18:50:21 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:22 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:50:22 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:50:23 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037238', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:23 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:25 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037238'}
+18:50:25 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037238'}
+18:50:26 | DEBUG | SERVER | {'tipo': 'cambiar_texto_nodo', 'id': 'nodo-1767133037238', 'texto': 'Nuevo Cuadro', 'h': 76}
+18:50:26 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+18:50:28 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+18:50:28 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+19:29:54 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:29:56 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767135004479'}
+19:29:57 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+19:29:57 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+19:29:59 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'estatica', 'id': 'flecha-1767137399881'}}
+19:30:02 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'estatica', 'id': 'flecha-1767137402140'}}
+19:30:03 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:30:06 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'top', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'dinamica', 'id': 'flecha-1767137406672'}}
+19:30:07 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:30:10 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(86.92203001203002,117.50140434567265,20.80573306407186)'}
+19:30:10 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767133790909', 'id': 'flecha-1767137410335'}}
+19:30:10 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'flecha-1767137399881', 'id': 'flecha-1767137410336'}}
+19:30:10 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'flecha-1767137402140', 'id': 'flecha-1767137410336'}}
+19:30:10 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'top', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137406672', 'id': 'flecha-1767137410337'}}
+19:30:11 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137410335'}
+19:30:14 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137410337'}
+19:30:16 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137410336'}
+19:30:18 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137410336'}
+19:30:19 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'estatica', 'id': 'flecha-1767137419915'}}
+19:30:22 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'top', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'dinamica', 'id': 'flecha-1767137422261'}}
+19:30:27 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+19:30:27 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+19:30:28 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:30:29 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137419915'}
+19:30:29 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137422261'}
+19:30:31 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767133037466'}
+19:30:31 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767133037466'}
+19:30:33 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'dinamica', 'id': 'flecha-1767137433827'}}
+19:30:35 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767137435695'}}
+19:30:37 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:30:40 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(107.9475663916744,89.87513274013159,20)'}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767133790909', 'id': 'flecha-1767137440248'}}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'flecha-1767137399881', 'id': 'flecha-1767137440253'}}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'flecha-1767137402140', 'id': 'flecha-1767137440254'}}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'top', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137406672', 'id': 'flecha-1767137440254'}}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137433827', 'id': 'flecha-1767137440255'}}
+19:30:40 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137435695', 'id': 'flecha-1767137440255'}}
+19:30:50 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440254'}
+19:30:51 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440254'}
+19:30:52 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440255'}
+19:30:56 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440248'}
+19:30:57 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440255'}
+19:30:58 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137440253'}
+19:31:01 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(86.85690579998982,149.92908330073465,69.37968121861697)'}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767133790909', 'id': 'flecha-1767137461860'}}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'left', 'tipo': 'flecha-1767137399881', 'id': 'flecha-1767137461862'}}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'bottom', 'tipo': 'flecha-1767137402140', 'id': 'flecha-1767137461863'}}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'top', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137406672', 'id': 'flecha-1767137461863'}}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137433827', 'id': 'flecha-1767137461863'}}
+19:31:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767133037466', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767133037238', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137435695', 'id': 'flecha-1767137461864'}}
+19:32:56 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(75.0916893618903,150.16351284955897,24.828299166959575)'}
+19:32:59 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767137579740', 'x': 440, 'y': 520, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+19:32:59 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767137579962', 'x': 500, 'y': 580, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+19:33:00 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767137579740'}
+19:33:00 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767137579740'}
+19:33:02 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767137579740', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767137579962', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767137582506'}}
+19:33:09 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:33:11 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767137579740', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767137579962', 'destinoPuntoId': 'bottom', 'tipo': 'dinamica', 'id': 'flecha-1767137591211'}}
+19:33:24 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(97.5123163376069,200.0659550612554,39.62003316085078)'}
+19:33:24 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767137579740', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767137579962', 'destinoPuntoId': 'top', 'tipo': 'flecha-1767137582506', 'id': 'flecha-1767137604044'}}
+19:33:24 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767137579740', 'origenPuntoId': 'right', 'destinoId': 'nodo-1767137579962', 'destinoPuntoId': 'bottom', 'tipo': 'flecha-1767137591211', 'id': 'flecha-1767137604045'}}
+19:34:47 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:34:49 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(83.31464720598079,149.11307133525233,20)'}
+19:34:51 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137582506'}
+19:34:52 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137604044'}
+19:34:53 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137604045'}
+19:34:59 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767137579740'}
+19:34:59 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767137579740'}
+19:35:02 | DEBUG | SERVER | {'tipo': 'eliminar_conexion', 'id': 'flecha-1767137591211'}
+19:35:03 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': None}
+19:35:04 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(70.05612259101265,183.42262290961366,20)'}
+19:35:07 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767137579740', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767137579962', 'destinoPuntoId': 'left', 'tipo': 'dinamica', 'id': 'flecha-1767137707071'}}
+19:35:08 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(110.09549789807699,138.7755398221309,81.62694271494256)'}
+19:35:09 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(73.5784939255527,169.31510533255337,105.11242188661603)'}
+19:35:10 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(105.9290411574651,145.14052426472324,48.92655898462796)'}
+19:35:12 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(94.41199646314149,189.03481517199867,148.31265872318556)'}
+19:35:12 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(90.06349925488064,99.7199766585164,23.610734192729815)'}
+20:05:58 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(84.60632564256343,163.56008466894568,125.45506939645776)'}
+20:05:59 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767139559838', 'x': 560, 'y': 540, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:05:59 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767139559982', 'x': 480, 'y': 440, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:06:01 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767139559982', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767139559838', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767139561753'}}
+20:10:54 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(74.51828902217886,72.94616947767722,21.53169853462949)'}
+20:10:55 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767139855978', 'x': 520, 'y': 520, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:10:56 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767139856208', 'x': 540, 'y': 420, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:10:57 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767139856208'}
+20:10:57 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767139856208'}
+20:10:58 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767139856208', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767139855978', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767139858778'}}
+20:15:43 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(84.22732409904019,222.7827376621749,146.2655465477893)'}
+20:15:44 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767140144247', 'x': 420, 'y': 500, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:15:44 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767140144467', 'x': 380, 'y': 560, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:15:45 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767140144247'}
+20:15:45 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767140144247'}
+20:15:46 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767140144247', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767140144467', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767140146797'}}
+20:16:45 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(103.7341879968314,117.57130823565765,20)'}
+20:16:47 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767140207059', 'x': 460, 'y': 500, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:16:47 | DEBUG | SERVER | {'tipo': 'nuevo_nodo', 'nodo': {'id': 'nodo-1767140207284', 'x': 480, 'y': 460, 'w': 100, 'h': 60, 'texto': 'Nuevo Cuadro', 'color': 'white'}}
+20:16:48 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767140207284'}
+20:16:48 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767140207284'}
+20:16:49 | DEBUG | SERVER | {'tipo': 'crear_conexion', 'conexion': {'origenId': 'nodo-1767140207284', 'origenPuntoId': 'bottom', 'destinoId': 'nodo-1767140207059', 'destinoPuntoId': 'top', 'tipo': 'estatica', 'id': 'flecha-1767140209926'}}
+20:23:03 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(109.33746278607009,151.96296994109412,20)'}
+20:24:20 | DEBUG | SERVER | {'tipo': 'asignar_color_user', 'color': 'rgb(90.96028853024868,107.84710629673307,32.66499985511655)'}
+20:32:07 | DEBUG | SERVER | {'tipo': 'seleccionar_nodo', 'id': 'nodo-1767140207284'}
+20:32:07 | DEBUG | SERVER | {'tipo': 'traer_al_frente', 'id': 'nodo-1767140207284'}
+20:32:08 | DEBUG | SERVER | {'tipo': 'cambiar_color_nodo', 'id': 'nodo-1767140207284', 'color': '#ecce6c'}
+20:32:38 | DEBUG | SERVER | {'tipo': 'cambiar_color_nodo', 'id': 'nodo-1767140207284', 'color': '#192416'}
+20:32:57 | DEBUG | SERVER | {'tipo': 'cambiar_color_nodo', 'id': 'nodo-1767140207284', 'color': '#23202d'}
+20:33:02 | DEBUG | SERVER | {'tipo': 'cambiar_color_nodo', 'id': 'nodo-1767140207284', 'color': '#222222'}
+20:33:35 | DEBUG | SERVER | {'tipo': 'cambiar_color_nodo', 'id': 'nodo-1767140207284', 'color': '#ecce6c'}
